@@ -1,6 +1,16 @@
 const mix = require('laravel-mix');
-require('laravel-mix-svelte');
 
+
+const VuetifyLoaderPlugins = require('vuetify-loader/lib/plugin')
+const CaseSensitivePathsPlugins = require('case-sensitive-paths-webpack-plugin')
+
+
+mix.webpackConfig({
+    plugins: [
+        new VuetifyLoaderPlugins(),
+        new CaseSensitivePathsPlugins()
+    ]
+})
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,8 +23,5 @@ require('laravel-mix-svelte');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .svelte({
-        customElement: true,
-        tag: null
-    });
+    .vue()
+    .sass('resources/sass/app.scss', 'public/css');
