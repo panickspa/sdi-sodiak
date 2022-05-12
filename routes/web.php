@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth:sanctum')->name('landing');
 
-Auth::routes();
+Route::get('/login', function(){
+    return view('auth/login');
+} )->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth:sanctum')->name('home');
